@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { returnErrors } from './errorActions';
+import { urls, baseUri } from "../common/urls";
+import { configAxios } from "../common/common";
 
 import {
   USER_LOADED,
@@ -18,7 +20,7 @@ export const loadUser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
 
   axios
-    .get('/api/auth/user', tokenConfig(getState))
+    .get(urls.authUser, tokenConfig(getState))
     .then(res =>
       dispatch({
         type: USER_LOADED,
@@ -35,24 +37,20 @@ export const loadUser = () => (dispatch, getState) => {
 
 // Register User
 export const register = ({ name, email, password, phone }) => dispatch => {
-  // Headers
-  const config = {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  };
-
-  // Request body
-  const body = JSON.stringify({ name, email, password, phone });
+  //axios.defaults.baseURL = baseUri;
 
   axios
-    .post('/api/users', body, config)
-    .then(res =>
+    .post(
+      urls.register,
+      JSON.stringify({ name, email, password, phone }),
+      configAxios
+    )
+    .then(res => {
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
       })
-    )
+    })
     .catch(err => {
       dispatch(
         returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL')
@@ -65,18 +63,8 @@ export const register = ({ name, email, password, phone }) => dispatch => {
 
 // Login User
 export const login = ({ email, password }) => dispatch => {
-  // Headers
-  const config = {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  };
-
-  // Request body
-  const body = JSON.stringify({ email, password });
-
   axios
-    .post('/api/auth', body, config)
+    .post(urls.login, JSON.stringify({ email, password }), configAxios)
     .then(res =>
       dispatch({
         type: LOGIN_SUCCESS,

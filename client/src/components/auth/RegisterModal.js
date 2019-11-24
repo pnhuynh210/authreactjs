@@ -152,6 +152,7 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
+
 export default connect(
   mapStateToProps,
   { register, clearErrors }

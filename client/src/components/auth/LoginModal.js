@@ -98,6 +98,7 @@ class LoginModal extends Component {
                   id='email'
                   placeholder='Email'
                   className='mb-3'
+                  value={this.state.email}
                   onChange={this.onChange}
                 />
 
@@ -106,6 +107,7 @@ class LoginModal extends Component {
                   type='password'
                   name='password'
                   id='password'
+                  value={this.state.password}
                   placeholder='Password'
                   className='mb-3'
                   onChange={this.onChange}

@@ -12,10 +12,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 class App extends Component {
-  componentDidMount() {
-    store.dispatch(loadUser());
-  }
-
   render() {
     return (
       <Provider store={store}>

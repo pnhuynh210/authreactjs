@@ -12,7 +12,7 @@ const User = require('../../models/User');
 // @route   POST api/auth
 // @desc    Auth user
 // @access  Public
-router.post('/', (req, res) => {
+router.post('/login', (req, res) => {
   const { email, password } = req.body;
 
   // Simple validation

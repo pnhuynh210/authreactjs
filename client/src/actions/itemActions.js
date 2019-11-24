@@ -2,6 +2,9 @@ import axios from 'axios';
 import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from './types';
 import { tokenConfig } from './authActions';
 import { returnErrors } from './errorActions';
+import { urls } from  '../common/urls';
+import { configAxios } from "../common/common";
+
 
 export const getItems = () => dispatch => {
   dispatch(setItemsLoading());
@@ -20,7 +23,7 @@ export const getItems = () => dispatch => {
 
 export const addItem = item => (dispatch, getState) => {
   axios
-    .post('/api/items', item, tokenConfig(getState))
+    .post(urls.items, item, tokenConfig(getState))
     .then(res =>
       dispatch({
         type: ADD_ITEM,
@@ -34,7 +37,7 @@ export const addItem = item => (dispatch, getState) => {
 
 export const deleteItem = id => (dispatch, getState) => {
   axios
-    .delete(`/api/items/${id}`, tokenConfig(getState))
+    .delete(`${urls.items}/${id}`, tokenConfig(getState))
     .then(res =>
       dispatch({
         type: DELETE_ITEM,

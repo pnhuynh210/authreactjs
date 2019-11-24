@@ -1,4 +1,4 @@
-export const baseUri = "https://authreactjs.herokuapp.com:5000";
+export const baseUri = "https://reacthuynh.herokuapp.com";
 
 export const urls = {
     login: `${baseUri}/api/auth/login`,
